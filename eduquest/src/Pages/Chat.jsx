@@ -17,7 +17,7 @@ import {
 
 import OpenAI from "openai";
 const apiKey = process.env.OPENAI_API_KEY;
-const openai = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true });
+const openai = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true });
 
 function Chat() {
 
@@ -62,7 +62,7 @@ function Chat() {
         const messageToSystem = {
             role: "system",
             content:
-                "Explain all concepts, terms, and context concisely. Pretend I am a person who is diagnosed with ADHD and have a hard time focusing."
+                "Explain all concepts, terms, and context concisely. Use only short sentences. Do not write long messages. Three sentences max. Pretend I am a person who is diagnosed with ADHD and have a hard time focusing. I need specialized help with my studies but please also be casual when speaking with me. You are my virtual tutor."
         }
 
         const requestToApi = {
@@ -95,7 +95,7 @@ function Chat() {
             setTimeout(() => {
                 const newMessage = {
                     message: message,
-                    sender: "StudyConquest",
+                    sender: "Quicki",
                     direction: "incoming"
                 }
 
@@ -122,7 +122,7 @@ function Chat() {
                     <ChatContainer>
                         <MessageList
                             scrollBehavior="smooth"
-                            typingIndicator={isTyping ? <TypingIndicator content="StudyConquest is typing" /> : null}>
+                            typingIndicator={isTyping ? <TypingIndicator content="Quicki is typing" /> : null}>
                             {messages.map((message, i) => {
                                 return (
                                     <><Message key={i}

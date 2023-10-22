@@ -19,7 +19,7 @@ function Upload(){
 
             <div className='row'style={{marginTop: "43%"}}>
             <div className='col'>
-            <img style={{height: "50px", float:"left", margin: "20px"}} src={abc}></img>
+            <Link to="/chat"><img style={{height: "50px", float:"left", margin: "20px"}} src={abc}></img></Link>
             </div>
                 <div  className='col'>
 <img style={{height: "50px", float: "right", margin: "20px"}} src={camera}></img>
