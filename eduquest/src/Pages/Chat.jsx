@@ -1,5 +1,10 @@
 import { useEffect, useState, useRef } from "react";
 import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
+import chicky from "../assets/chickyai.png";
+import {FaArrowLeft} from "react-icons/fa";
+import {GrMoreVertical} from "react-icons/gr";
+import {BiMicrophone} from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 import {
     MainContainer,
@@ -11,8 +16,8 @@ import {
 } from "@chatscope/chat-ui-kit-react";
 
 import OpenAI from "openai";
-const openai = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true });
-
+const apiKey = process.env.OPENAI_API_KEY;
+const openai = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true });
 
 function Chat() {
 
@@ -106,8 +111,12 @@ function Chat() {
 
     return (
         <>
-            <div style={{ position: "relative", height: "550px"}}>
-            <h1 className="chat-title" style={{textAlign: "center"}}>Quicki</h1>
+            <div style={{ position: "relative", height: "550px", backgroundColor: "#F8F8F8"}}>
+            <div className="row" style={{padding: "10px 0"}}>
+                <div className="col chat arrow"><Link to="/"><FaArrowLeft fill="#FEB800" /></Link></div>
+                <div className="col"><img src={chicky} style={{ width: "100px"}}/></div>
+                <div className="col chat more"><GrMoreVertical fill="#FE8900" /></div>
+                </div>
 
                 <MainContainer>
                     <ChatContainer>
@@ -122,7 +131,9 @@ function Chat() {
                                 )
                             })}
                         </MessageList>
-                        <MessageInput placeholder="Type your message here" onSend={handleSend} />
+                        <MessageInput placeholder={"Type your message here"} onSend={handleSend} attachButton={false} />
+                        
+
                     </ChatContainer>
                 </MainContainer>
             </div>
