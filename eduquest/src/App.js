@@ -4,6 +4,7 @@ import Customize from './Pages/Customize'
 import Category from './Pages/Category'
 import Chat from './Pages/Chat';
 import Journey from './Pages/Journey';
+import Upload from './Pages/Upload';
 import './App.css';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route exact path="/category" element={<Category />} />
         <Route exact path="/chat" element={<Chat />} />
         <Route exact path="/journey" element={<Journey />} />
+        <Route exact path="/upload" element={<Upload />} />
       </Routes>
     </BrowserRouter>
   );
