@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 
 import {
@@ -11,7 +11,7 @@ import {
 } from "@chatscope/chat-ui-kit-react";
 
 import OpenAI from "openai";
-const openai = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true  });
+const openai = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true });
 
 
 function Chat() {
@@ -24,7 +24,7 @@ function Chat() {
         }
     ])
 
-    let splitMessages=[]
+    let splitMessages = []
 
     const handleSend = async (message) => {
         const newMessage = {
@@ -42,22 +42,22 @@ function Chat() {
 
     }
 
-    async function handleMessage(chatMessages){
+    async function handleMessage(chatMessages) {
 
         let messagesFromApi = chatMessages.map((messageObj) => {
-            let role =""
-            if(messageObj.sender === "You"){
+            let role = ""
+            if (messageObj.sender === "You") {
                 role = "user"
-            }else{
+            } else {
                 role = "assistant"
             }
-        return {role: role, content: messageObj.message}
+            return { role: role, content: messageObj.message }
         })
 
         const messageToSystem = {
             role: "system",
-            content: 
-                "Explain all concepts like I am a person who is diagnosed with ADHD and has a hard time focusing."
+            content:
+                "Explain all concepts, terms, and context concisely. Pretend I am a person who is diagnosed with ADHD and have a hard time focusing."
         }
 
         const requestToApi = {
@@ -73,29 +73,30 @@ function Chat() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(requestToApi)
-        }).then((res) => {return res.json()}).then((data) => {
-
+        }).then((res) => { return res.json() }).then((data) => {
             splitMessages = data.choices[0].message.content.split('\n')
         }
         )
-        for(const message of splitMessages){
+        for (const message of splitMessages) {
             await printMessages(message);
         }
         setIsTyping(false)
-        splitMessages=[]
+        splitMessages = []
 
     }
 
-    async function printMessages(message)
-    {
+    async function printMessages(message) {
         return new Promise(resolve => {
             setTimeout(() => {
-                const newMessage = {message: message,
+                const newMessage = {
+                    message: message,
                     sender: "StudyConquest",
-                    direction: "incoming"}
-    
-                    if (message.length > 0) {
-                        setMessages((chatMessages) => [...chatMessages, newMessage])}
+                    direction: "incoming"
+                }
+
+                if (message.length > 0) {
+                    setMessages((chatMessages) => [...chatMessages, newMessage])
+                }
 
                 resolve();
             }, 1000);
@@ -105,17 +106,19 @@ function Chat() {
 
     return (
         <>
-            <div style={{ position: "relative", height: "500px" }}>
+            <div style={{ position: "relative", height: "550px"}}>
+            <h1 className="chat-title" style={{textAlign: "center"}}>Quicki</h1>
+
                 <MainContainer>
                     <ChatContainer>
                         <MessageList
                             scrollBehavior="smooth"
-                            typingIndicator={isTyping ? <TypingIndicator content="StudyConquest is typing"/> : null }>
+                            typingIndicator={isTyping ? <TypingIndicator content="StudyConquest is typing" /> : null}>
                             {messages.map((message, i) => {
                                 return (
-                                    <Message key={i}
+                                    <><Message key={i}
                                         model={message}
-                                    />
+                                    /><span className={ message.sender === "You" ? "triangle-user" : "triangle-chat"}></span></>
                                 )
                             })}
                         </MessageList>
@@ -123,6 +126,7 @@ function Chat() {
                     </ChatContainer>
                 </MainContainer>
             </div>
+            
         </>
     )
 

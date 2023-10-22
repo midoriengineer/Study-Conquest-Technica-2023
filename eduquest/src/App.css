@@ -36,3 +36,114 @@
     transform: rotate(360deg);
   }
 }
+
+/* MESSAGE COLORS */
+.cs-message--outgoing .cs-message__content {
+  background-color: #FE8900 !important;
+  color: #fff;
+  font-weight: bold;
+  border-radius:0;
+  margin-right: 10px;
+
+}
+
+.cs-message__content{
+  background-color: #E9E9E9 !important;
+  color: #A6A6A6;
+  font-weight: bold;
+  border-radius:0;
+  margin-left: 10px;
+
+}
+.cs-message--incoming .cs-message__content {
+  background-color: #E9E9E9 !important;
+  color: #A6A6A6;
+  font-weight: bold;
+  border-radius:0;
+  margin-left: 10px;
+
+
+
+}
+
+.cs-message__content-wrapper {
+  margin: 10px 0;
+}
+
+/* BACKGROUND COLOR */
+.cs-message-list{
+  background-color: #F8F8F8 !important;
+}
+
+
+/* MESSAGE INPUT */
+.cs-chat-container .cs-message-input {
+  border-top: solid 1px #F8F8F8;
+  border-right: solid 0px #F8F8F8;
+  border-bottom: solid 0px #F8F8F8;
+  border-left: solid 0px #F8F8F8;
+  margin-top: auto;
+  padding: .3em 0 .3em 0em;
+  color: rgba(0,0,0,.87);
+  background-color: #F8F8F8;
+}
+
+.cs-message-input__content-editor{
+  background-color: #E9E9E9 !important;
+}
+.cs-message-input__content-editor-wrapper{
+  background-color: #E9E9E9 !important;
+}
+
+.cs-button--send {
+  color: #FE8900;
+}
+
+.cs-button--attachment {
+  color: #FE8900;
+}
+
+
+/* CHAT TITLE */
+.cs-main-container {
+  border-color: #F8F8F8 !important;
+}
+.chat-title {
+  color: #FFAE53;
+  font-weight: bold;
+  font-size: 1.5em;
+  background-color: #F8F8F8 !important;
+  margin: 0;
+  padding: 30px;
+}  
+
+/* SCROLLBAR */
+.ps__rail-y:hover > .ps__thumb-y, .ps__rail-y:focus > .ps__thumb-y, .ps__rail-y.ps--clicking .ps__thumb-y {
+  background-color: #F3B164;
+}
+
+.ps__thumb-y {
+  background-color: #F3B164;
+}
+
+.triangle-user {
+  border-color: transparent transparent #FE8900 transparent;
+  border-style: solid;
+  border-width: 0px 10px 10px 10px;
+  height: 0px;
+  width: 0px;
+  float: right;
+  margin-top: -20px;
+
+
+}
+
+.triangle-chat {
+  border-color: transparent transparent #E9E9E9 transparent;
+  border-style: solid;
+  border-width: 0px 10px 10px 10px;
+  height: 0px;
+  width: 0px;
+  float: left;
+  margin-top: -20px;
+}
