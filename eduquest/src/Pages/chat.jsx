@@ -17,7 +17,7 @@ import {
 
 import OpenAI from "openai";
 const apiKey = process.env.OPENAI_API_KEY;
-const openai = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true });
+const openai = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true });
 
 function Chat() {
 
