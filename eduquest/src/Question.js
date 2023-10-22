@@ -1,89 +1,77 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import OpenAI from 'openai';
-const openai = new OpenAI({ apiKey: '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',dangerouslyAllowBrowser: true});
 
-const levelsData = [
-  {
-    questions: ['What is 2 + 2?', 'What is 3*3?'],
-    answers: [4, 9],
-  },
-  // Add more levels, questions
-];
+const openai = new OpenAI({
+  apiKey: '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',
+  dangerouslyAllowBrowser: true,
+});
 
-function Question({ level, setCurrentLevel }) {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+function Question({ setCurrentLevel }) {
   const [playerAnswer, setPlayerAnswer] = useState('');
   const [isCorrect, setIsCorrect] = useState(null);
-  const [question,setQuestion] = useState('');
-  const questions = levelsData[level].questions;
-  const correctAnswers = levelsData[level].answers;
+  const [question, setQuestion] = useState('');
 
   const handleAnswerSubmission = () => {
-    const expectedAnswer = correctAnswers[currentQuestionIndex];
-    const isAnswerCorrect =
-      typeof expectedAnswer === 'number'
-        ? parseInt(playerAnswer, 10) === expectedAnswer
-        : playerAnswer.toLowerCase() === expectedAnswer.toLowerCase();
 
-    if (isAnswerCorrect) {
-      setIsCorrect(true);
-      if (currentQuestionIndex === questions.length - 1) {
-        if (level < levelsData.length - 1) {
-          setCurrentLevel(level + 1);
-          setCurrentQuestionIndex(0); 
-        } else {
-          // Player has completed all levels
-        }
-      } else {
-        setCurrentQuestionIndex(currentQuestionIndex + 1);
-      }
-    } else {
-      setIsCorrect(false);
+    const generatedQuestion = question; 
+    let expectedAnswer = '';
+  
+    if (generatedQuestion.includes('+')) {
+
+      const numbers = generatedQuestion.split('+');
+  
+
+      expectedAnswer = (parseInt(numbers[0]) + parseInt(numbers[1])).toString();
     }
+  
+    const isAnswerCorrect = playerAnswer === expectedAnswer;
+  
+    setIsCorrect(isAnswerCorrect);
   };
+  
 
   useEffect(() => {
-    // Fetch questions from OpenAI
-    async function generateQuestion() {
+    async function generateMathAdditionQuestion() {
       try {
-        const response = await openai.completions.create({
-          model: 'gpt-3.5-turbo',
-          messages: [
-            { role: 'user', content: `Generate a question for level ${level + 1}.` },
-          ],
+        console.log("Hello");
+        const response = await openai.Completions.create({
+          engine: 'text-davinci-002',
+          prompt: 'Generate a math addition question.',
+          max_tokens: 150,
+          n: 1, 
         });
 
+        console.log('OpenAI response:', response); 
 
-        setQuestion(response.choices[0].message.content);
-        console.log(Question,"This is Question");
+        const generatedQuestion = response.choices[0].text;
+        console.log(generatedQuestion);
+        setQuestion(generatedQuestion);
       } catch (error) {
-        console.error('OpenAI API error:', error);
+        console.error('Error generating math addition question:', error);
       }
     }
 
-    generateQuestion();
-  }, [level]);
+    generateMathAdditionQuestion();
+  }, []);
 
   return (
     <div>
-      <h2>Level {level + 1}</h2>
+      <h2>Mathematics Quiz Time</h2>
+      <p>{question}</p>
+      <input
+        type="text"
+        value={playerAnswer}
+        onChange={(e) => setPlayerAnswer(e.target.value)}
+      />
+      <button onClick={handleAnswerSubmission}>Submit</button>
+
       {isCorrect !== null ? (
         isCorrect ? (
-          <p>Congratulations, Let's move to the next Question?</p>
+          <p>Congratulations, Let's move to the next question.</p>
         ) : (
-          <p>Oops!! No worries, Let's try again :) </p>
+          <p>Oops! No worries, Let's try again.</p>
         )
-      ) : (
-        <div>
-          <p>{questions[currentQuestionIndex]}</p>
-          <input
-            type="text"
-            value={playerAnswer}
-            onChange={(e) => setPlayerAnswer(e.target.value)}
-          />
-          <button onClick={handleAnswerSubmission}>Submit</button>
-        </div>
-      )}
+      ) : null}
     </div>
   );
 }
