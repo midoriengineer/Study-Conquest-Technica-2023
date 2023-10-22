@@ -13,10 +13,7 @@ const marginStyle = {
 };
     return(
      <> <img src={myImage} alt="My Image" width="462.5" height="1000"/>
-        <div style={{marginTop: "-700px"}}>
-        <h1>Study Conquest</h1>
-        </div>
-        <div style={{marginTop: "320px"}}><Link to="/Customize"><button>Customize Your Character</button></Link>
+        <div style={{marginTop: "-150px"}}><Link to="/Customize"><button>Customize Your Character</button></Link>
         </div></>
     )
 }export default Home;
