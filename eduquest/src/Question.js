@@ -15,6 +15,7 @@ function Question({ setCurrentLevel }) {
 
     const generatedQuestion = question; 
     let expectedAnswer = '';
+    
   
     if (generatedQuestion.includes('+')) {
 
