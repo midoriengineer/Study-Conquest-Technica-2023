@@ -2,6 +2,9 @@ import Home from './Pages/Home'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Customize from './Pages/Customize'
 import Category from './Pages/Category'
+import Chat from './Pages/Chat';
+import Journey from './Pages/Journey';
+import Upload from './Pages/Upload';
 import './App.css';
 
 function App() {
@@ -9,8 +12,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route exact path="/Customize" element={<Customize />} />
-        <Route exact path="/Category" element={<Category />} />
+        <Route exact path="/customize" element={<Customize />} />
+        <Route exact path="/category" element={<Category />} />
+        <Route exact path="/chat" element={<Chat />} />
+        <Route exact path="/journey" element={<Journey />} />
+        <Route exact path="/upload" element={<Upload />} />
       </Routes>
     </BrowserRouter>
   );
